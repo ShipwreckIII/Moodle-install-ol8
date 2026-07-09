@@ -6,7 +6,9 @@
 # Contains ONLY steps confirmed to work. No trial/failed approaches included.
 #
 # WHAT THIS SCRIPT DOES (high level):
-#   1. Collects required inputs (server IP, DB password, proxy, etc.)
+#   1. Collects required inputs (server IP, DB passwords)
+#      NOTE: no proxy input — servers arrive with proxy pre-configured
+#      by the network team; curl/dnf use it automatically.
 #   2. Updates the system
 #   3. Enables PHP 8.2 and MariaDB 10.11 module streams (DNF4 modularity)
 #   4. Installs Apache, MariaDB, PHP 8.2 + all Moodle-required extensions
@@ -53,17 +55,12 @@ echo ""
 read -rsp "Enter a password to set for the MariaDB root user: " ROOT_PASS
 echo ""
 
-# --- Corporate proxy (optional): required in proxy-restricted networks ---
-# Verified behavior: curl works through the proxy; PECL does not resolve DNS.
-# This script uses curl for all downloads, so only env proxy vars are needed.
-read -rp "Enter proxy URL if required (e.g. http://10.0.52.250:8080) or press Enter to skip: " PROXY_URL
-
-if [ -n "$PROXY_URL" ]; then
-    export http_proxy="$PROXY_URL"
-    export https_proxy="$PROXY_URL"
-    export no_proxy="localhost,127.0.0.1,${SERVER_IP}"
-    echo "[INFO] Proxy configured for this session: $PROXY_URL"
-fi
+# --- Proxy note (no input needed) ---
+# The network team (NITC) pre-configures the proxy on each server
+# (environment variables + /etc/dnf/dnf.conf). curl and dnf automatically
+# use that existing configuration. This script therefore does NOT ask for
+# or set any proxy — it relies on the server's existing setup. On servers
+# with direct Internet access, downloads simply go direct. Either way works.
 
 # --- Fixed values (the verified standard layout) ---
 MOODLE_URL="https://download.moodle.org/download.php/direct/stable405/moodle-latest-405.tgz"

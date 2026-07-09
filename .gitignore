@@ -1,0 +1,5 @@
+# Installer state - contains plaintext DB/root passwords (chmod 600), and
+# per-step progress markers. Never commit either.
+.install_state.tmp
+.install_state.done
+state/

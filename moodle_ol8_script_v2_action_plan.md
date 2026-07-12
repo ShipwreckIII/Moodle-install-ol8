@@ -94,8 +94,7 @@ Main script behavior:
 - On startup, main script scans `state/` and offers:
   1. Run from start (clears all .done markers — warn first)
   2. Resume from first incomplete step (default when .done markers exist)
-  3. Run a single specific step
-- Subscripts source shared variables from the state file (Fix #3) so each is
+  3. Runables from the state file (Fix #3) so each is
   independently runnable.
 - `set -e` in every subscript; main script stops on first failing step and
   reports which step failed.
@@ -117,7 +116,8 @@ or `X-Redirect-By: Moodle` (configured).
 - ~~Fix #7~~ — auto-clean of leftover DB tables / moodledata on rerun
 - ~~Fix #8~~ — placeholder-handling policy (chat workflow rule, not script logic)
 
----
+--- a single specific step
+- Subscripts source shared vari
 
 ## Working rules for the chat doing the rewrite
 

@@ -6,6 +6,24 @@ SELinux kept **Enforcing**. See `moodle_ol8_script_v2_action_plan.md` for the fu
 
 ---
 
+## Prerequisites
+
+**1. Oracle Linux 8.10 (x86_64) ISO**
+
+This installer is verified against Oracle Linux 8.10 (x86_64), full DVD image.
+
+- Oracle Linux website: https://www.oracle.com/middleeast/linux/
+- [Download OracleLinux-R8-U10-x86_64-dvd.iso](https://yum.oracle.com/ISOS/OracleLinux/OL8/u10/x86_64/OracleLinux-R8-U10-x86_64-dvd.iso?source=:ow:o:p:nav:121620LinuxHero_middleeast)
+
+If you prefer a different OL8 update release, browse the Oracle Linux website above.
+
+**2. Vendored files**
+
+`libsodium-2.0.23.tgz` and `moodle-latest-405.tgz` must be present at the repo root
+before running the installer (see "Install" below for the verification command).
+
+---
+
 ## Before you run
 
 **1. Confirm the OS is Oracle Linux 8.x**
@@ -43,8 +61,8 @@ Configure it explicitly first:
 
 ```bash
 sudo dnf install -y git
-git config --global http.proxy http://10.0.52.250:8080
-git config --global https.proxy http://10.0.52.250:8080
+git config --global http.proxy http://<YOUR_PROXY>:<PORT>
+git config --global https.proxy http://<YOUR_PROXY>:<PORT>
 ```
 
 On a server with direct Internet access, skip the two `git config` lines.
